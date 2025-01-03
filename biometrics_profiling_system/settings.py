@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'werkzeug_debugger_runserver',
     'login.apps.LoginConfig',
     'user_profile.apps.UserProfileConfig',
+    'register.apps.RegisterConfig',
+    'webauthn.apps.WebauthnConfig',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +127,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',  # Map 'error' to 'danger' for Bootstrap
+}

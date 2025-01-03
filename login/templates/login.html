@@ -34,12 +34,13 @@
                             <img src="{% static 'images/fingerprint.png' %}" alt="" srcset="">
                         </div> 
                        <div class="input-field">
-                            <input type="submit" class="login-btn" value="Login">
+                            <input type="submit" class="login-btn" value="Scan fingerprint to login">
                        </div> 
+                       <div class="input-field register-btn">
+                            <a type="submit" class="register-btn" value="Scan fingerprint to login" href="{% url 'register' %}">Register</a>
+                        </div> 
                     </div>  
                 </div>
-
-  
 
             </div>
         </div>

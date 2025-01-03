@@ -94,7 +94,17 @@ i{
     background: #B83D3D;
     color: #FFFFFF;
  }
-
+.register-btn{
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    height: 45px;
+    border-radius: 5px;
+    transition: .4s;
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+}
 span a{
     text-decoration: none;
     font-weight: 700;
