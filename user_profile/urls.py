@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+
+app_name = 'user-profile'
 urlpatterns = [
-    path("", views.user_profile, name="user-profile")
+    path("<int:ref_num>", views.user_profile, name="user-profile")
 ]

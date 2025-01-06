@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from user_profile.models import User
 from django.db import IntegrityError
+from django.contrib import auth
+
 
 # Create your views here.
 def regiser(request):
@@ -21,32 +23,32 @@ def regiser(request):
         parent = request.POST.get("parent")
         work_status = request.POST.get("work-status")
         
-        existing_ref_num = User.objects.get(user_ref_num = ref_num)
+        existing_ref_num = User.objects.filter(ref_num = ref_num)
         if existing_ref_num:
             messages.error(request, "Reference number already exists")
             return render(request, "register.html")
         try:
                 # Attempt to create the user
                 user = User.objects.create(
-                    user_ref_num=ref_num,
-                    user_fname=first_name,
-                    user_lname=last_name,
-                    user_mname=middle_name,
-                    user_suffix=suffix,
-                    user_email=email,
-                    user_contact_num=contact_number, 
-                    user_birthdate=birthdate, 
-                    user_sex=sex, 
-                    user_address=address,
-                    user_guardian=guardian, 
-                    user_parent=parent,
-                    user_work_status=work_status 
+                    ref_num=ref_num,
+                    fname=first_name,
+                    lname=last_name,
+                    mname=middle_name,
+                    suffix=suffix,
+                    email=email,
+                    contact_num=contact_number, 
+                    birthdate=birthdate, 
+                    sex=sex, 
+                    address=address,
+                    guardian=guardian, 
+                    parent=parent,
+                    work_status=work_status 
                 )
-                
-                user.save()
-                messages.success(request, "You have successfully registered!")
-                return render(request, "register.html")
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
+                auth.login(request, user)
+                # user.save()
+                # messages.success(request, "You have successfully registered!")
+                return render(redirect('start_fido2'))
         except Exception:
-                messages.warning(request, "Something went wrong")
-        
+            messages.warning(request, "Something went wrong")
     return render(request, "register.html")

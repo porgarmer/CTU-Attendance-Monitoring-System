@@ -37,13 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mfa',
     'django_extensions',
     'werkzeug_debugger_runserver',
     'login.apps.LoginConfig',
     'user_profile.apps.UserProfileConfig',
     'register.apps.RegisterConfig',
-    'webauthn.apps.WebauthnConfig',
 ]
+
+AUTH_USER_MODEL = 'user_profile.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,3 +135,23 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',  # Map 'error' to 'danger' for Bootstrap
 }
+
+FA_UNALLOWED_METHODS=()   # Methods that shouldn't be allowed for the user
+MFA_LOGIN_CALLBACK="login.views.login_user_in"            # A function that should be called by username to login the user in session
+MFA_RECHECK=True           # Allow random rechecking of the user
+MFA_RECHECK_MIN=10         # Minimum interval in seconds
+MFA_RECHECK_MAX=30         # Maximum in seconds
+MFA_QUICKLOGIN=True        # Allows quick login for returning users
+
+TOKEN_ISSUER_NAME="django_mfa2_example"      #TOTP Issuer name, this should be your project's name
+
+if DEBUG:
+  U2F_APPID="https://localhost"    #URL For U2F
+  FIDO_SERVER_ID=u"localhost"      # Server rp id for FIDO2, it is the full domain of your project
+else:
+  U2F_APPID="https://django-mfa2-example.herokuapp.com"    #URL For U2F
+  FIDO_SERVER_ID=u"django-mfa2-example.herokuapp.com"      # Server rp id for FIDO2, it is the full domain of your project
+
+FIDO_SERVER_NAME=u"django_mfa2_example"
+MFA_REDIRECT_AFTER_REGISTRATION = 'accounts:index'
+MFA_SUCCESS_REGISTRATION_MSG = 'Your keys have successfully been created! You '

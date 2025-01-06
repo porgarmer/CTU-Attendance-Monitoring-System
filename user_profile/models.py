@@ -1,18 +1,58 @@
 from django.db import models
+from django.contrib.auth.models import UserManager, AbstractBaseUser, PermissionsMixin
+from django.utils import timezone
 
+
+class CustomUserManager(UserManager):
+    def _create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError("You have not provided a valid email address")
+        email = self.normalize_email(email)
+        
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        
+        return user
+    
+    
+    def create_user(self, email=None, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+    
+    def create_superuser(self, email=None, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self._create_user(email, password, **extra_fields)
+    
 # Create your models here.
-class User(models.Model):
-    user_ref_num = models.CharField(max_length=255, primary_key=True)
-    user_fname = models.CharField(max_length=50)
-    user_lname = models.CharField(max_length=50)
-    user_mname = models.CharField(max_length=50, null=True)
-    user_suffix=models.CharField(max_length=25, null=True)
-    user_email = models.EmailField(max_length=100, null=True)
-    user_contact_num = models.CharField(max_length=20, null=True)
-    user_birthdate = models.DateField(auto_now_add=False, auto_now=False)
-    user_sex = models.CharField(max_length=25)
-    user_address = models.CharField(max_length=255)
-    user_guardian = models.CharField(max_length=100)
-    user_parent = models.CharField(max_length=100)
-    user_work_status = models.CharField(max_length=25)
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(blank=True, default='', unique=True)
+    ref_num = models.CharField(max_length=255, primary_key=True)
+    fname = models.CharField(max_length=50)
+    lname = models.CharField(max_length=50)
+    mname = models.CharField(max_length=50, null=True)
+    suffix=models.CharField(max_length=25, null=True)
+    contact_num = models.CharField(max_length=20, null=True)
+    birthdate = models.DateField(auto_now_add=False, auto_now=False, null=True)
+    sex = models.CharField(max_length=25)
+    address = models.CharField(max_length=255)
+    guardian = models.CharField(max_length=100)
+    parent = models.CharField(max_length=100)
+    work_status = models.CharField(max_length=25)
 
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(default=timezone.now)
+    last_login = models.DateTimeField(blank=True, null=True)
+    
+    objects = CustomUserManager()
+    
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    
+    def __str__(self):
+        return self.email

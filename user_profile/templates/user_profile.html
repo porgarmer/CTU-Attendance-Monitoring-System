@@ -21,7 +21,7 @@
                       <div class="d-flex flex-column align-items-center text-center">
                         <img src="{% static 'images/profile-user.png' %}" alt="user" class="rounded-circle" width="150">
                         <div class="mt-3">
-                          <h4>{{user.user_fname}} {{user_minitial}} {{user.user_fname}}</h4>
+                          <h4>{{user.fname}} {{user_minitial}} {{user.fname}}</h4>
                           {% comment %} <input type="text" value="Oten" class="text-muted font-size-sm" style="text-align: center;"readonly> {% endcomment %}
                         </div>
                       </div>
@@ -57,7 +57,7 @@
                           <h6 class="mb-0">Reference Number</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_ref_num}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.ref_num}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -66,7 +66,7 @@
                           <h6 class="mb-0">First Name</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_fname}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.fname}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -75,7 +75,7 @@
                           <h6 class="mb-0">Last Name</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_lname}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.lname}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -84,7 +84,7 @@
                           <h6 class="mb-0">Middle Name</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_mname}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.mname}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -93,7 +93,7 @@
                           <h6 class="mb-0">Suffix</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_suffix}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.suffix}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -102,7 +102,7 @@
                           <h6 class="mb-0">Email Address</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_email}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.email}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -111,7 +111,7 @@
                           <h6 class="mb-0">Contact Number</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_contact_num}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.contact_num}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -120,7 +120,7 @@
                           <h6 class="mb-0">Birthdate</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_birthdate}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.birthdate}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -129,7 +129,7 @@
                           <h6 class="mb-0">Sex</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_sex}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.sex}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -138,7 +138,7 @@
                           <h6 class="mb-0">Address</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_address}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.address}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -147,7 +147,7 @@
                           <h6 class="mb-0">Guardian</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_guardian}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.guardian}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -156,7 +156,7 @@
                           <h6 class="mb-0">Parent</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_parent}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.parent}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>
@@ -165,7 +165,7 @@
                           <h6 class="mb-0">Work Status</h6>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" value="{{user.user_work_status}}" readonly class="text-secondary">
+                          <input type="text" value="{{user.work_status}}" readonly class="text-secondary">
                         </div>
                       </div>
                       <hr>

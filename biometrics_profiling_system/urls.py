@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import mfa
+import mfa.TrustedDevice
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('mfa/', include('mfa.urls')), 
+    path('devices/add/', mfa.TrustedDevice.add,name="mfa_add_new_trusted_device"), #required if you intend adding some devices
     path('', include('login.urls')),
-    path('user-profile', include('user_profile.urls')),
+    path('user-profile', include('user_profile.urls', namespace='user-profile')),
     path('register', include('register.urls')),
-    path('webauthn/', include('webauthn.urls')),
 ]
