@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+<!-- title -->
+
+{% block title %} {{page_title}} {% endblock title %}
+
+<!-- load static tags -->
+{% load static %}
+<!-- css -->
+{% block css %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+  *{
+      font-family: 'Poppins', sans-serif;
+  }
+  .wrapper{
+      background: #ececec;
+      padding: 0 20px 0 20px;
+  }
+  .main{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+  }
+  
+  .row{
+      padding: 50px !important;
+      padding-top: 10px !important;
+  
+  }
+  
+  h1{
+      color: #FFFFFF;
+  }
+  
+  form{
+      background-color: #2C2A24 !important;
+      overflow: auto;    
+  }
+  
+  label{
+      color: #FFFFFF;
+  }
+  
+  /* input[type=text], input[type=password], input[type=email], select option{
+      background-color: #DAD4B5;
+  }
+  
+  
+  input[type=text], input[type=password], input[type=email], select option{
+      background-color: #DAD4B5;
+  }
+  
+  input:focus{
+      background-color: #DAD4B5 !important;
+  } */
+  
+  
+  .register-btn{
+      margin-top: 10px;
+      border: none;
+      outline: none;
+      height: 45px;
+      border-radius: 5px;
+      transition: .4s;
+      color: #FFFFFF;
+      text-align: center;
+      text-decoration: none;
+  }
+  
+  
+  
+  
+  
+  
+  .row{
+    width:  900px;
+    height:550px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0px;
+    box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
+  }
+  @media only screen and (max-width: 768px){
+      .row{
+          max-width:420px;
+          width: 100%;
+      }
+  }
+  
+  .login-btn{
+      width: 10em;
+      border: none;
+      outline: none;
+      height: 45px;
+      background: #993333;
+      border-radius: 5px;
+      transition: .4s;
+      color: #FFFFFF;
+   }
+   .login-btn:hover{
+      background: #B83D3D;
+      color: #FFFFFF;
+   }
+</style>
+{% endblock css %}
+<!-- content begins -->
+{% block content %}
+<body>
+   <div class="wrapper">
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="alert alert-{{message.tags}}" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <div class="container main">
+            <form class="row g-3 m-0 register-form" method="post" action='{% url "accounts:register" %}''>
+                {% csrf_token %}
+                <div class="d-flex d-flex justify-content-center">
+                    <h1>Registration Form</h1>
+             </div>
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Reference Number</label>
+                    <input type="number" class="form-control" id="inputAddress" name="ref-num"  onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="inputEmail4" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="inputEmail4" name="first-name" required>
+                </div>                
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Middle Name</label>
+                    <input type="text" class="form-control" id="inputEmail4" name="middle-name">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="inputEmail4" name="last-name" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputState" class="form-label">Suffix</label>
+                    <select id="inputState" class="form-select" name="suffix">
+                        <option selected disabled>Choose...</option>
+                        <option value="">None</option>
+                        <option value="Jr.">Jr.</option>
+                        <option value="Sr.">Sr.</option>
+                        <option value="II">II</option>
+                        <option value="III">III</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="inputEmail4" name="username">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Contact Number</label>
+                    <input type="text" class="form-control" id="inputEmail4" name="contact-number" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Birthdate</label>
+                    <input type="date" class="form-control" id="inputEmail4" name="birthdate" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputState" class="form-label">Sex</label>
+                    <select id="inputState" class="form-select" name="sex" required>
+                      <option selected disabled>Choose...</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Address</label>
+                  <input type="text" class="form-control" id="inputAddress" name="address" required>
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">Guardian</label>
+                  <input type="text" class="form-control" id="inputAddress2" name="guardian">
+                </div>
+                <div class="col-12">
+                    <label for="inputAddress2" class="form-label">Parent</label>
+                    <input type="text" class="form-control" id="inputAddress2" name="parent" >
+                  </div>
+                <div class="col-12">
+                    <label for="inputState" class="form-label">Work Status</label>
+                    <select id="inputState" class="form-select" name="work-status">
+                        <option value="">Select Your Work Status..</option>
+                        <option value="Employed">Employed</option>
+                        <option value="Self-Employed">Self-Employed</option>
+                        <option value="Unemployed">Unemployed</option>
+                        <option value="Student">Student</option>
+                        <option value="Retired">Retired</option>
+                        <option value="Full-Time Employee">Full-Time Employee</option>
+                        <option value="Part-Time Employee">Part-Time Employee</option>
+                        <option value="Freelancer/Contractor">Freelancer/Contractor</option>
+                        <option value="Intern">Intern</option>
+                        <option value="Homemaker">Homemaker</option>
+                        <option value="Looking for Work">Looking for Work</option>
+                        <option value="Not Looking for Work<">Not Looking for Work</option>
+                        <option value="Disabled/Unable to Work">Disabled/Unable to Work</option>
+                    </select>
+                </div>
+                {% comment %} <div class="col-md-6">
+                    <div class="d-flex flex-column">
+                        <label for="fingerprint" class="form-label">Register Fingerprint</label>
+                        <a href=""> <img src="{% static 'images/fingerprint-light.png' %}" alt="" id="fingerprint" srcset="" width=10%></a>
+                    </div>
+                   
+                </div> {% endcomment %}
+                <div class="d-flex flex-row mb-3 gap-3">
+                 
+                    <input type="submit" class="login-btn" value="Register">
+                    <a class="register-btn" value="Scan fingerprint to login" href="{% url 'accounts:login' %}">Back to login</a>
+       
+                </div>
+              
+              </form>
+        </div>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                const alertInstance = bootstrap.Alert.getOrCreateInstance(alert); // Get the Bootstrap Alert instance
+                alertInstance.close(); // Programmatically close the alert
+            });
+
+            const successMessage = document.querySelector('.alert-success');
+            if (successMessage) {
+                setTimeout(() => {
+                    window.location.href = "{% url 'accounts:login' %}"; // Redirect after 5 seconds
+                }, 2000); // 5 seconds
+            }
+        }, 4000);
+    </script>
+</body>
+{% endblock content %}

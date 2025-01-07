@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+whitenoise = "*"
+gunicorn = "*"
+python-decouple = "*"
+psycopg2 = "*"
+dj-database-url = "*"
+jsonfield = "*"
+python-jose = "*"
+django-mfa2 = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
